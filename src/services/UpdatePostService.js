@@ -19,7 +19,7 @@ class UpdatePostService {
 
     if (!post) throw new Error("this post doesnt exist")
 
-    if (post.username !== username) throw new Error("This user cannot delete another user post")
+    if (post.username !== username) throw new Error("This user cannot update another user post")
 
     post.title = title;
     post.paragraph = paragraph;
