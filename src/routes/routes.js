@@ -11,12 +11,13 @@ const routes = Router();
 
 // Página principal
 routes.get("/", authenticate, (request, response) => {
+	const user = request.user
 	const fs = require("fs");
 
 	const data = fs.readFileSync("./database/posts.json", "utf-8");
 	const postRepository = JSON.parse(data.toString());
 
-	return response.json({posts: postRepository})
+	return response.json({user, posts: postRepository})
 })
 
 //MyPosts
