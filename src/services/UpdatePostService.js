@@ -12,14 +12,14 @@ class UpdatePostService {
 			(user) => user.username === username
 		);
 
-    if (!user) throw new Error("This user doesn't exist")
+    if (!user) throw new Error("Esse usuário não existe")
 
     const post = postRepository.find(post => post.id === +id);
     const postIndex = postRepository.findIndex(post => post.id === +id)
 
-    if (!post) throw new Error("this post doesnt exist")
+    if (!post) throw new Error("Esse poste não existe")
 
-    if (post.username !== username) throw new Error("This user cannot update another user post")
+    if (post.username !== username) throw new Error("Esse usuário não pode editar um post de outro usuário")
 
     post.title = title;
     post.paragraph = paragraph;

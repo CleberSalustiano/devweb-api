@@ -9,7 +9,7 @@ class CreateUserService {
 			(user) => user.username === username
 		);
 
-    if (user) throw new Error("This user already exist")
+    if (user) throw new Error("Esse usuário já existe")
     
     userRepository.push({username, password});
 

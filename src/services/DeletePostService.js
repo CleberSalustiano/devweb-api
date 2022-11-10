@@ -12,13 +12,13 @@ class DeletePostService {
 			(user) => user.username === username
 		);
 
-    if (!user) throw new Error("This user doesn't exist")
+    if (!user) throw new Error("Esse usuário não existe")
 
     const post = postRepository.find(post => post.id === +id);
 
-    if (!post) throw new Error("this post doesnt exist")
+    if (!post) throw new Error("Esse post não existe")
 
-    if (post.username !== username) throw new Error("This user cannot delete another user post")
+    if (post.username !== username) throw new Error("Esse usuário não pode editar um post de outro usuário")
 
     const newPostRepository = postRepository.filter(post => post.id !== +id);
 

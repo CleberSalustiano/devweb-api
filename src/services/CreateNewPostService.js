@@ -12,7 +12,7 @@ class CreateNewPostService {
 			(user) => user.username === username
 		);
 
-    if (!user) throw new Error("This user doesn't exist")
+    if (!user) throw new Error("Esse usuário não existe")
 
     const {id} = postRepository[postRepository.length - 1];
 
