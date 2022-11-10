@@ -1,4 +1,4 @@
-const { Router } = require("express");
+const { Router, request } = require("express");
 const authenticate = require("../middlewares/auth");
 const AuthenticateUserService = require("../services/AuthenticateUserService");
 const CreateNewPostService = require("../services/CreateNewPostService");
@@ -11,6 +11,16 @@ const routes = Router();
 
 // Página principal
 routes.get("/", authenticate, (request, response) => {
+	const fs = require("fs");
+
+	const data = fs.readFileSync("./database/posts.json", "utf-8");
+	const postRepository = JSON.parse(data.toString());
+
+	return response.json({posts: postRepository})
+})
+
+//MyPosts
+routes.get("/myPosts", authenticate, (request, response) => {
 	const user = request.user;
 
 	const findAllUserPost = new FindAllUserPostService();
@@ -22,8 +32,9 @@ routes.get("/", authenticate, (request, response) => {
 	return response.json({ user });
 });
 
-// Entrar
 
+
+// Entrar
 routes.post("/session", (request, response) => {
 	try {
 		const { username, password } = request.body;
