@@ -8,10 +8,12 @@ class AuthenticateUserService {
 		const userRepository = JSON.parse(data.toString());
 
 		const user = userRepository.find(
-			(user) => user.username === username && user.password === password
+			(user) => user.username === username
 		);
 
-		if (!user) throw new Error("Esse usuário não está cadastrado");
+		if (!user) throw new Error("Usuário/Senha Inválida");
+
+		if (user.password != password) throw new Error("Usuário/Senha Inválida")
 
 		const token = sign({ username }, process.env.JWT_SECRET, {
 			expiresIn: process.env.JWT_EXPIRESIN,
